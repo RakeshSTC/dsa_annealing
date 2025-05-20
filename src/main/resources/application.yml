@@ -1,0 +1,20 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /dsa-compute
+spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:32768/orbitauth
+#    username: postgres
+#    password: postgrespw
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+  file:
+    path: /home/matmot_bk_user/cogent-service/cogent-auth/
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
