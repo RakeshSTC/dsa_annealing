@@ -63,7 +63,7 @@ public class DsaComputeApplication {
         }
         
      // Run Dijkstra's
-       // findShortestPath("A", "B", map);
+        findShortestPath("A", "B", map);
         
         simualtedAnnealing();
         
@@ -77,8 +77,6 @@ public class DsaComputeApplication {
         System.out.printf("Initial x = %.4f, f(x) = %.4f\n", current, f(current));
 
         int totalCount = 0;
-        int itr = 0;
-        double iTemp =0.0;
         
         for (int iter = 0; iter < MAX_ITER && temp > FINAL_TEMP; iter++) {
             // Generate neighbor by small random step
@@ -88,6 +86,8 @@ public class DsaComputeApplication {
             double delta = f(candidate) - f(current);
 
             // Accept move if it's better, or probabilistically if worse
+            //P(accept)=e to the power−ΔE/T
+            //i.e. ΔE: how much worse it is 𝑇 & T: temperature (exploration level)
             if (delta < 0 || Math.exp(-delta / temp) > rand.nextDouble()) {
                 current = candidate;
             }
@@ -105,12 +105,9 @@ public class DsaComputeApplication {
                 System.out.printf("Iter %5d: x = %.4f, f(x) = %.4f, Temp = %.6f\n",
                         iter, current, f(current), temp);
             }
-            totalCount ++;
-            itr = iter;
-            iTemp =temp;
         }
 
-        System.out.printf("\nBest solution: x = %.6f, f(x) = %.6f\n , totalCount = %d, temp = %.6f%n, itr = %d, iTemp = %.6f%n", best, f(best), totalCount, temp, itr, iTemp);
+        System.out.printf("\nBest solution: x = %.6f, f(x) = %.6f\n", best, f(best));
 	}
 	
 	private static void findShortestPath(String start, String end, Map<String, List<int[]>> map) {
